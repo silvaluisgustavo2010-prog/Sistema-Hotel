@@ -9,17 +9,22 @@ public class Reserva {
     private long quantidadeDiarias;
     private double valorTotal;
     private LocalDateTime horarioLiberacao;
+    private Boolean paga;
+    private FormaPagamento formaPagamento;
 
     public Reserva(Hospede hospede, Quarto quarto, LocalDateTime dataEntrada, LocalDateTime dataSaida) {
+        if (!dataEntrada.isBefore(dataSaida)) {
+            throw new IllegalArgumentException("A data de entrada deve ser anterior à data de saída.");
+        }
         this.hospede = hospede;
         this.quarto = quarto;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.horarioLiberacao = dataSaida.plusHours(2);
+        this.paga = false;
     }
-
     public void calcularDiarias() {
-        quantidadeDiarias = ChronoUnit.DAYS.between(dataEntrada, dataSaida);
+        quantidadeDiarias = ChronoUnit.DAYS.between(dataEntrada.toLocalDate(), dataSaida.toLocalDate());
     }
 
     public void calcularValorTotal() {
@@ -49,5 +54,15 @@ public class Reserva {
     }
     public LocalDateTime getDataSaida() {
         return dataSaida;
+    }
+    public Boolean getPaga() {
+        return paga;
+    }
+    public void marcarComoPaga(FormaPagamento formaPagamento) {
+        paga = true;
+        this.formaPagamento = formaPagamento;
+    }
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
     }
 }
