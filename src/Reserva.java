@@ -13,6 +13,9 @@ public class Reserva {
     private FormaPagamento formaPagamento;
 
     public Reserva(Hospede hospede, Quarto quarto, LocalDateTime dataEntrada, LocalDateTime dataSaida) {
+        if (hospede == null || quarto == null || dataEntrada == null || dataSaida == null) {
+            throw new IllegalArgumentException("Os dados da reserva são obrigatórios.");
+        }
         if (!dataEntrada.isBefore(dataSaida)) {
             throw new IllegalArgumentException("A data de entrada deve ser anterior à data de saída.");
         }

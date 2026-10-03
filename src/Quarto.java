@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Quarto {
     private String tipo;
     private Integer numero;

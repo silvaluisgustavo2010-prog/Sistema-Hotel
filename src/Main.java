@@ -36,5 +36,31 @@ public class Main {
         System.out.println("Pagamento feito: " + pagamento);
         System.out.println("Reserva paga: " + reserva.getPaga());
         System.out.println("Forma de pagamento: " + reserva.getFormaPagamento());
+        boolean segundoPagamento =
+                sistema.pagarReserva(
+                        reserva,
+                        FormaPagamento.CREDITO
+                );
+
+        System.out.println("Segundo pagamento feito: " + segundoPagamento);
+        System.out.println("----------------------------");
+
+        System.out.println("Reservas do hóspede João:");
+
+        for (Reserva reservaHospede : sistema.consultarReservasPorHospede(hospede)) {
+            System.out.println(
+                    "Quarto: " + reservaHospede.getQuarto().getNumero()
+            );
+        }
+
+        System.out.println("----------------------------");
+
+        System.out.println("Reservas do quarto 101:");
+
+        for (Reserva reservaQuarto : sistema.consultarReservasPorQuarto(quarto)) {
+            System.out.println(
+                    "Hóspede: " + reservaQuarto.getHospede().getNome()
+            );
+        }
     }
 }

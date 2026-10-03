@@ -78,6 +78,9 @@ public class Hotel {
         return true;
     }
     public ArrayList<Reserva> consultarReservasPorHospede(Hospede hospede) {
+        if (hospede == null) {
+            return new ArrayList<>();
+        }
         ArrayList<Reserva> resultado = new ArrayList<>();
         for (Reserva reserva : reservas) {
             if (reserva.getHospede().getCpf().equals(hospede.getCpf())) {
@@ -87,6 +90,9 @@ public class Hotel {
         return resultado;
     }
     public ArrayList<Reserva> consultarReservasPorQuarto(Quarto quarto) {
+        if (quarto == null) {
+            return new ArrayList<>();
+        }
         ArrayList<Reserva> resultado = new ArrayList<>();
         for (Reserva reserva : reservas) {
             if (reserva.getQuarto().getNumero().equals(quarto.getNumero())) {
