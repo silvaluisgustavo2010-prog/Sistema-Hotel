@@ -11,6 +11,8 @@ public class Reserva {
     private LocalDateTime horarioLiberacao;
     private Boolean paga;
     private FormaPagamento formaPagamento;
+    private Boolean cancelada;
+    private LocalDateTime horarioCheckOut;
 
     public Reserva(Hospede hospede, Quarto quarto, LocalDateTime dataEntrada, LocalDateTime dataSaida) {
         if (hospede == null || quarto == null || dataEntrada == null || dataSaida == null) {
@@ -25,6 +27,7 @@ public class Reserva {
         this.dataSaida = dataSaida;
         this.horarioLiberacao = dataSaida.plusHours(2);
         this.paga = false;
+        this.cancelada = false;
     }
     public void calcularDiarias() {
         quantidadeDiarias = ChronoUnit.DAYS.between(dataEntrada.toLocalDate(), dataSaida.toLocalDate());
@@ -67,5 +70,18 @@ public class Reserva {
     }
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
+    }
+    public Boolean getCancelada() {
+        return cancelada;
+    }
+    public void cancelar() {
+        this.cancelada = true;
+    }
+    public void registrarCheckOut() {
+        horarioCheckOut = LocalDateTime.now();
+        horarioLiberacao = horarioCheckOut.plusHours(2);
+    }
+    public LocalDateTime getHorarioCheckOut() {
+        return horarioCheckOut;
     }
 }

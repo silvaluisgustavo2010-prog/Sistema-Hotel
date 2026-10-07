@@ -24,6 +24,9 @@
             if (hospedeCadastrado == null || quartoCadastrado == null) {
                 return false;
             }
+            if (hotel.calcularTotalDevidoPorHospede(hospedeCadastrado) > 0) {
+                return false;
+            }
             if (!entrada.isBefore(saida)) {
                 return false;
             }
@@ -33,13 +36,23 @@
             Reserva reserva = new Reserva(hospedeCadastrado, quartoCadastrado, entrada, saida);
             reserva.calcularDiarias();
             reserva.calcularValorTotal();
-            return hotel.cadastrarReserva(reserva);
+            Divida divida = new Divida(hospedeCadastrado,reserva,"Reserva do quarto: " + quartoCadastrado.getNumero(), reserva.getValorTotal());
+            if (!hotel.cadastrarReserva(reserva)) {
+                return false;
+            }
+            return hotel.cadastrarDivida(divida);
         }
         public ArrayList<Hospede> listarHospedes() {
             return hotel.listarHospedes();
         }
         public ArrayList<Quarto> listarQuartos() {
             return hotel.listarQuartos();
+        }
+        public ArrayList<Reserva> listarReservas() {
+            return hotel.listarReservas();
+        }
+        public ArrayList<Divida> listarDividas() {
+            return hotel.listarDividas();
         }
         public boolean pagarReserva(Reserva reserva, FormaPagamento formaPagamento) {
             if (reserva == null) {
@@ -66,7 +79,66 @@
             }
             return hotel.consultarReservasPorQuarto(quarto);
         }
-        public ArrayList<Reserva> listarReservas() {
-            return hotel.listarReservas();
+        public ArrayList<Divida> consultarDividasPorHospede(Hospede hospede) {
+            if (hospede == null) {
+                return new ArrayList<>();
+            }
+            return hotel.consultarDividasPorHospede(hospede);
+        }
+        public Double calcularTotalDevidoPorHospede(Hospede hospede) {
+            if (hospede == null) {
+                return 0.0;
+            }
+            return hotel.calcularTotalDevidoPorHospede(hospede);
+        }
+        public boolean pagarDivida(Divida divida, Double valor, FormaPagamento formaPagamento){
+            if (divida == null) {
+                return false;
+            }
+            return divida.registrarPagamento(valor, formaPagamento);
+        }
+        public boolean cancelarReserva(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            if (reserva.getCancelada()) {
+                return false;
+            }
+            reserva.cancelar();
+            return true;
+        }
+        public boolean finalizarReserva(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            if (LocalDateTime.now().isBefore(reserva.getDataSaida())) {
+                return false;
+            }
+            return reserva.getQuarto().inicializarLimpeza();
+        }
+        public boolean limpezaConcluida(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            return !LocalDateTime.now().isBefore(reserva.getHorarioLiberacao());
+        }
+        public boolean finalizarLimpeza(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            if (!limpezaConcluida(reserva)) {
+                return false;
+            }
+            return reserva.getQuarto().finalizarLimpeza();
+        }
+        public boolean realizarCheckOut(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            if (reserva.getCancelada()) {
+                return false;
+            }
+            reserva.registrarCheckOut();
+            return reserva.getQuarto().inicializarLimpeza();
         }
     }

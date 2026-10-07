@@ -5,11 +5,13 @@ public class Hotel {
     private ArrayList<Quarto> quartos;
     private ArrayList<Reserva> reservas;
     private ArrayList<Hospede> hospedes;
+    private ArrayList<Divida> dividas;
 
     public Hotel() {
         quartos = new ArrayList<>();
         reservas = new ArrayList<>();
         hospedes = new ArrayList<>();
+        dividas = new ArrayList<>();
     }
     public boolean cadastrarQuarto(Quarto quarto) {
         if (quarto == null) {
@@ -42,6 +44,13 @@ public class Hotel {
         reservas.add(reserva);
         return true;
     }
+    public boolean cadastrarDivida(Divida divida){
+        if (divida == null) {
+            return false;
+        }
+        dividas.add(divida);
+        return true;
+    }
     public boolean cadastrarHospede(Hospede hospede) {
         if (hospede == null) {
             return false;
@@ -67,10 +76,12 @@ public class Hotel {
         if (!entrada.isBefore(saida)) {
             return false;
         }
+        if (quarto.getStatusLimpeza() != StatusLimpeza.LIMPO){
+            return false;
+        }
         for (Reserva reserva : reservas) {
-            if (reserva.getQuarto().getNumero().equals(quarto.getNumero())) {
-                if (entrada.isBefore(reserva.getHorarioLiberacao())
-                        && saida.isAfter(reserva.getDataEntrada())) {
+            if (!reserva.getCancelada() && reserva.getQuarto().getNumero().equals(quarto.getNumero())) {
+                if (entrada.isBefore(reserva.getHorarioLiberacao()) && saida.isAfter(reserva.getDataEntrada())) {
                     return false;
                 }
             }
@@ -102,13 +113,16 @@ public class Hotel {
         return resultado;
     }
     public ArrayList<Quarto> listarQuartos() {
-        return quartos;
+        return new ArrayList<>(quartos);
     }
     public ArrayList<Hospede> listarHospedes() {
-        return hospedes;
+        return new ArrayList<>(hospedes);
     }
     public ArrayList<Reserva> listarReservas() {
-        return reservas;
+        return new ArrayList<>(reservas);
+    }
+    public ArrayList<Divida> listarDividas() {
+        return new ArrayList<>(dividas);
     }
     public Hospede buscarHospedePorCpf(String cpf) {
         if (cpf == null || cpf.isBlank()) {
@@ -131,5 +145,29 @@ public class Hotel {
             }
         }
         return null;
+    }
+    public ArrayList<Divida> consultarDividasPorHospede(Hospede hospede) {
+        if (hospede == null) {
+            return new ArrayList<>();
+        }
+        ArrayList<Divida> resultado = new ArrayList<>();
+        for (Divida divida : dividas) {
+            if (divida.getHospede().getCpf().equals(hospede.getCpf())) {
+                resultado.add(divida);
+            }
+        }
+        return resultado;
+    }
+    public Double calcularTotalDevidoPorHospede(Hospede hospede){
+        if (hospede == null) {
+            return 0.0;
+        }
+        Double total = 0.0;
+        for (Divida divida : dividas) {
+            if (divida.getHospede().getCpf().equals(hospede.getCpf())) {
+                total += divida.calcularSaldo();
+            }
+        }
+        return total;
     }
 }
