@@ -36,11 +36,7 @@
             Reserva reserva = new Reserva(hospedeCadastrado, quartoCadastrado, entrada, saida);
             reserva.calcularDiarias();
             reserva.calcularValorTotal();
-            Divida divida = new Divida(hospedeCadastrado,reserva,"Reserva do quarto: " + quartoCadastrado.getNumero(), reserva.getValorTotal());
-            if (!hotel.cadastrarReserva(reserva)) {
-                return false;
-            }
-            return hotel.cadastrarDivida(divida);
+            return hotel.cadastrarReserva(reserva);
         }
         public ArrayList<Hospede> listarHospedes() {
             return hotel.listarHospedes();
@@ -104,18 +100,24 @@
             if (reserva.getCancelada()) {
                 return false;
             }
+            if (reserva.jaFezCheckout()) {
+                return false;
+            }
+            if (!LocalDateTime.now().isBefore(reserva.getDataEntrada())) {
+                return false;
+            }
             reserva.cancelar();
             return true;
         }
-        public boolean finalizarReserva(Reserva reserva) {
+        /*public boolean finalizarReserva(Reserva reserva) {
             if (reserva == null) {
                 return false;
             }
-            if (LocalDateTime.now().isBefore(reserva.getDataSaida())) {
+            if (LocalDateTime.now().isBefore(reserva.getDataEntrada())) {
                 return false;
             }
             return reserva.getQuarto().inicializarLimpeza();
-        }
+        }*/
         public boolean limpezaConcluida(Reserva reserva) {
             if (reserva == null) {
                 return false;
@@ -138,7 +140,30 @@
             if (reserva.getCancelada()) {
                 return false;
             }
+            if (reserva.jaFezCheckout()) {
+                return false;
+            }
+            if (LocalDateTime.now().isBefore(reserva.getDataEntrada())) {
+                return false;
+            }
             reserva.registrarCheckOut();
+            reserva.recalcularValorSaidaAntecipada();
+            Divida divida = new Divida(reserva.getHospede(), reserva, "Hospedagem do quarto: " + reserva.getQuarto().getNumero(), reserva.getValorTotal());
+            if (!hotel.cadastrarDivida(divida)) {
+                return false;
+            }
             return reserva.getQuarto().inicializarLimpeza();
+        }
+        public boolean atualizarLimpeza(Reserva reserva) {
+            if (reserva == null) {
+                return false;
+            }
+            if (!reserva.jaFezCheckout()){
+                return false;
+            }
+            if (LocalDateTime.now().isBefore(reserva.getHorarioLiberacao())) {
+                return false;
+            }
+            return reserva.getQuarto().finalizarLimpeza();
         }
     }

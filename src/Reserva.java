@@ -84,4 +84,12 @@ public class Reserva {
     public LocalDateTime getHorarioCheckOut() {
         return horarioCheckOut;
     }
+    public boolean jaFezCheckout() {
+        return horarioCheckOut != null;
+    }
+    public void recalcularValorSaidaAntecipada() {
+        long horas = java.time.Duration.between(dataEntrada, horarioCheckOut).toHours();
+        quantidadeDiarias = Math.max(1,(horas + 23) / 24);
+        calcularValorTotal();
+    }
 }

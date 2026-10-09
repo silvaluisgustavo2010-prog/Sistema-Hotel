@@ -35,7 +35,7 @@ public class Quarto {
         return true;
     }
     public boolean inicializarLimpeza() {
-        if (statusLimpeza == StatusLimpeza.EM_LIMPEZA) {
+        if (statusLimpeza != StatusLimpeza.EM_LIMPEZA) {
             return false;
         }
         statusLimpeza = StatusLimpeza.EM_LIMPEZA;
