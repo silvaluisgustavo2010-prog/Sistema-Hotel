@@ -1,58 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sistemahotel.controller.HelloController"
-            prefWidth="800" prefHeight="500">
+<BorderPane prefHeight="600" prefWidth="900" styleClass="fundo" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemahotel.controller.HelloController">
 
   <top>
-    <VBox spacing="5" style="-fx-background-color: #243447;">
+    <VBox alignment="CENTER" spacing="8" styleClass="cabecalho">
       <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
+        <Insets bottom="30" left="25" right="25" top="30" />
       </padding>
-      <Label text="SISTEMA HOTEL"
-             style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
-      <Label text="Gestão de hóspedes, quartos e reservas"
-             style="-fx-text-fill: #dce6f0; -fx-font-size: 14px;"/>
+      <Label styleClass="titulo" text="SISTEMA HOTEL" />
+      <Region maxWidth="70" prefHeight="3" prefWidth="70" styleClass="linha-dourada" />
+      <Label styleClass="subtitulo" text="Gestão de hóspedes, quartos e reservas" />
     </VBox>
   </top>
 
   <center>
-    <VBox alignment="CENTER" spacing="20">
+    <VBox alignment="CENTER" spacing="25">
       <padding>
-        <Insets top="30" right="30" bottom="30" left="30"/>
+        <Insets bottom="30" left="30" right="30" top="30" />
       </padding>
 
-      <Label text="Menu principal"
-             style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+      <Label styleClass="titulo-menu" text="Menu principal" />
 
-      <HBox alignment="CENTER" spacing="15">
-        <Button text="Hóspedes" onAction="#abrirHospedes"
-                prefWidth="150" prefHeight="50"/>
-        <Button text="Quartos" onAction="#abrirQuartos"
-                prefWidth="150" prefHeight="50"/>
+      <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="abrirTela" onAction="#abrirHospedes" styleClass="cartao" text="👤&#10;Cadastrar&#10;Hóspedes" />
+        <Button onAction="#abrirQuartos" styleClass="cartao" text="🛏&#10;Quartos" />
+        <Button onAction="#abrirReservas" styleClass="cartao" text="📅&#10;Reservas" />
       </HBox>
 
-      <HBox alignment="CENTER" spacing="15">
-        <Button text="Reservas" onAction="#abrirReservas"
-                prefWidth="150" prefHeight="50"/>
-        <Button text="Pagamentos" onAction="#abrirPagamentos"
-                prefWidth="150" prefHeight="50"/>
+      <HBox alignment="CENTER" spacing="20">
+        <Button onAction="#abrirPagamentos" styleClass="cartao" text="💳&#10;Pagamentos" />
+        <Button onAction="#abrirLimpeza" styleClass="cartao" text="🧹&#10;Limpeza dos quartos" />
       </HBox>
 
-      <Button text="Limpeza dos quartos" onAction="#abrirLimpeza"
-              prefWidth="315" prefHeight="50"/>
-
-      <Label fx:id="mensagem"
-             text="Selecione uma opção para começar."
-             wrapText="true"
-             style="-fx-font-size: 14px;"/>
+      <Label fx:id="mensagem" styleClass="mensagem" text="Selecione uma opção para começar." wrapText="true" />
     </VBox>
   </center>
 

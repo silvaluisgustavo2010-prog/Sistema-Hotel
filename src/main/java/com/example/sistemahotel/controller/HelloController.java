@@ -1,8 +1,11 @@
 
 package com.example.sistemahotel.controller;
 
+import com.example.sistemahotel.service.Navegacao;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -10,8 +13,10 @@ public class HelloController {
     private Label mensagem;
 
     @FXML
-    private void abrirHospedes() {
+    private void abrirHospedes() throws IOException {
         mensagem.setText("Área de cadastro e consulta de hóspedes.");
+        Navegacao.abrirTela("hospedes.fxml",
+                "Hóspedes");
     }
 
     @FXML
@@ -33,4 +38,5 @@ public class HelloController {
     private void abrirLimpeza() {
         mensagem.setText("Área de controle de limpeza dos quartos.");
     }
+
 }

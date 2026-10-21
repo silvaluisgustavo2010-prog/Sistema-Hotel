@@ -1,0 +1,68 @@
+.fundo {
+    -fx-background-color: #f5f1ea;
+}
+
+/* Cabeçalho azul-marinho com degradê */
+.cabecalho {
+    -fx-background-color: linear-gradient(to right, #1b2a3a, #2e4660);
+}
+
+.titulo {
+    -fx-text-fill: white;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+
+.subtitulo {
+    -fx-text-fill: #d9e2ec;
+    -fx-font-size: 14px;
+}
+
+/* Detalhe dourado embaixo do título */
+.linha-dourada {
+    -fx-background-color: #c9a24d;
+}
+
+.titulo-menu {
+    -fx-text-fill: #243447;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Botões em formato de cartão */
+.cartao {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 110px;
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-border-color: #e6dcc8;
+    -fx-border-radius: 14;
+    -fx-text-fill: #243447;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 12, 0.1, 0, 4);
+}
+
+/* Quando o mouse passa por cima */
+.cartao:hover {
+    -fx-background-color: #243447;
+    -fx-text-fill: #e6c777;
+    -fx-border-color: #c9a24d;
+    -fx-translate-y: -3;
+}
+
+/* Quando clica */
+.cartao:pressed {
+    -fx-background-color: #1b2a3a;
+    -fx-translate-y: 0;
+}
+
+.mensagem {
+    -fx-text-fill: #6b7785;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+}
