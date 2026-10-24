@@ -92,5 +92,7 @@ public class SistemaHotel {
         return reserva.getQuarto().finalizarLimpeza();
     }
 
-    public boolean atualizarLimpeza(Reserva reserva) { return finalizarLimpeza(reserva); }
+    public boolean atualizarLimpeza(Reserva reserva) { return finalizarLimpeza(reserva);
+    }
+
 }
