@@ -1,17 +1,20 @@
 ### IntelliJ IDEA ###
+.idea/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-.kotlin
+
+### Kotlin ###
+.kotlin/
 
 ### Eclipse ###
-.apt_generated
+.apt_generated/
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
+.sts4-cache/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
@@ -27,5 +30,11 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store.idea/
+.DS_Store
+
+### Maven ###
 target/
+
+### Java ###
+*.class
+*.log
