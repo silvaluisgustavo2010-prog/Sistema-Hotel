@@ -5,35 +5,31 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.net.URL;
 
 public class Navegacao {
 
     public static void abrirTela(String nomeArquivo, String titulo)
             throws IOException {
 
-        Path pastaResources = Paths.get("src/main/resources");
+        URL arquivoFXML = Navegacao.class.getResource(
+                "/com/example/sistemahotel/" + nomeArquivo
+        );
 
-        Path arquivoEncontrado;
-
-        try (Stream<Path> arquivos = Files.walk(pastaResources)) {
-            arquivoEncontrado = arquivos
-                    .filter(Files::isRegularFile)
-                    .filter(p -> p.getFileName().toString().equals(nomeArquivo))
-                    .findFirst()
-                    .orElseThrow(() -> new IOException(
-                            "FXML não encontrado: " + nomeArquivo));
+        if (arquivoFXML == null) {
+            throw new IOException(
+                    "FXML não encontrado: " + nomeArquivo
+            );
         }
 
-        FXMLLoader loader = new FXMLLoader(arquivoEncontrado.toUri().toURL());
+        FXMLLoader loader = new FXMLLoader(arquivoFXML);
         Scene scene = new Scene(loader.load());
 
         Stage stage = new Stage();
         stage.setTitle(titulo);
         stage.setScene(scene);
+        stage.setMinWidth(760);
+        stage.setMinHeight(560);
         stage.show();
     }
 }

@@ -30,6 +30,7 @@ public class HospedesController {
                 cpf = cpf.substring(0, 3) + "." + cpf.substring(3);
             }
             if (!valorNovo.equals(cpf)) {
+
                 txtfCpfDoCliente.setText(cpf);
                 txtfCpfDoCliente.positionCaret(cpf.length());
             }

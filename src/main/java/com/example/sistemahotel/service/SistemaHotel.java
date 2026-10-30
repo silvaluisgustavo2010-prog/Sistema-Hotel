@@ -27,7 +27,8 @@ public class SistemaHotel {
     }
 
     public boolean fazerReserva(Hospede hospede, Quarto quarto, LocalDateTime entrada, LocalDateTime saida) {
-        if (hospede == null || quarto == null || entrada == null || saida == null || !entrada.isBefore(saida)) return false;
+        if (hospede == null || quarto == null || entrada == null || saida == null || !entrada.isBefore(saida))
+            return false;
         Hospede cadastrado = hotel.buscarHospedePorCpf(hospede.getCpf());
         Quarto quartoCadastrado = hotel.buscarQuartoPorNumero(quarto.getNumero());
         if (cadastrado == null || quartoCadastrado == null) return false;
@@ -40,20 +41,42 @@ public class SistemaHotel {
         }
     }
 
-    public ArrayList<Hospede> listarHospedes() { return hotel.listarHospedes(); }
-    public ArrayList<Quarto> listarQuartos() { return hotel.listarQuartos(); }
-    public ArrayList<Reserva> listarReservas() { return hotel.listarReservas(); }
-    public ArrayList<Divida> listarDividas() { return hotel.listarDividas(); }
+    public ArrayList<Hospede> listarHospedes() {
+        return hotel.listarHospedes();
+    }
+
+    public ArrayList<Quarto> listarQuartos() {
+        return hotel.listarQuartos();
+    }
+
+    public ArrayList<Reserva> listarReservas() {
+        return hotel.listarReservas();
+    }
+
+    public ArrayList<Divida> listarDividas() {
+        return hotel.listarDividas();
+    }
 
     public boolean pagarReserva(Reserva reserva, FormaPagamento formaPagamento) {
         if (reserva == null || !hotel.listarReservas().contains(reserva)) return false;
         return reserva.marcarComoPaga(formaPagamento);
     }
 
-    public ArrayList<Reserva> consultarReservasPorHospede(Hospede hospede) { return hotel.consultarReservasPorHospede(hospede); }
-    public ArrayList<Reserva> consultarReservasPorQuarto(Quarto quarto) { return hotel.consultarReservasPorQuarto(quarto); }
-    public ArrayList<Divida> consultarDividasPorHospede(Hospede hospede) { return hotel.consultarDividasPorHospede(hospede); }
-    public Double calcularTotalDevidoPorHospede(Hospede hospede) { return hotel.calcularTotalDevidoPorHospede(hospede); }
+    public ArrayList<Reserva> consultarReservasPorHospede(Hospede hospede) {
+        return hotel.consultarReservasPorHospede(hospede);
+    }
+
+    public ArrayList<Reserva> consultarReservasPorQuarto(Quarto quarto) {
+        return hotel.consultarReservasPorQuarto(quarto);
+    }
+
+    public ArrayList<Divida> consultarDividasPorHospede(Hospede hospede) {
+        return hotel.consultarDividasPorHospede(hospede);
+    }
+
+    public Double calcularTotalDevidoPorHospede(Hospede hospede) {
+        return hotel.calcularTotalDevidoPorHospede(hospede);
+    }
 
     public boolean pagarDivida(Divida divida, Double valor, FormaPagamento formaPagamento) {
         if (divida == null || !hotel.listarDividas().contains(divida)) return false;
@@ -61,14 +84,16 @@ public class SistemaHotel {
     }
 
     public boolean cancelarReserva(Reserva reserva) {
-        if (reserva == null || !hotel.listarReservas().contains(reserva) || reserva.getCancelada() || reserva.jaFezCheckout()) return false;
+        if (reserva == null || !hotel.listarReservas().contains(reserva) || reserva.getCancelada() || reserva.jaFezCheckout())
+            return false;
         if (!LocalDateTime.now().isBefore(reserva.getDataEntrada())) return false;
         reserva.cancelar();
         return true;
     }
 
     public boolean realizarCheckOut(Reserva reserva) {
-        if (reserva == null || !hotel.listarReservas().contains(reserva) || reserva.getCancelada() || reserva.jaFezCheckout()) return false;
+        if (reserva == null || !hotel.listarReservas().contains(reserva) || reserva.getCancelada() || reserva.jaFezCheckout())
+            return false;
         LocalDateTime agora = LocalDateTime.now();
         if (agora.isBefore(reserva.getDataEntrada())) return false;
         if (reserva.getQuarto().getStatusLimpeza() != StatusLimpeza.LIMPO) return false;
@@ -92,7 +117,8 @@ public class SistemaHotel {
         return reserva.getQuarto().finalizarLimpeza();
     }
 
-    public boolean atualizarLimpeza(Reserva reserva) { return finalizarLimpeza(reserva);
+    public boolean atualizarLimpeza(Reserva reserva) {
+        return finalizarLimpeza(reserva);
     }
 
 }
