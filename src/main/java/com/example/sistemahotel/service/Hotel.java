@@ -49,15 +49,34 @@ public class Hotel {
     }
 
     public boolean quartoDisponivel(Quarto quarto, LocalDateTime entrada, LocalDateTime saida) {
-        if (quarto == null || entrada == null || saida == null || !entrada.isBefore(saida)) return false;
-        Quarto cadastrado = buscarQuartoPorNumero(quarto.getNumero());
-        if (cadastrado == null || cadastrado.getStatusLimpeza() != StatusLimpeza.LIMPO) return false;
-        for (Reserva reserva : reservas) {
-            if (reserva.getCancelada() || !reserva.getQuarto().getNumero().equals(cadastrado.getNumero())) continue;
-            // O intervalo reservado inclui as duas horas de bloqueio para limpeza após o checkout previsto/real.
-            LocalDateTime fimBloqueio = reserva.getHorarioLiberacao();
-            if (entrada.isBefore(fimBloqueio) && saida.isAfter(reserva.getDataEntrada())) return false;
+
+        if (quarto == null || entrada == null || saida == null || !entrada.isBefore(saida)) {
+            return false;
         }
+
+        Quarto cadastrado = buscarQuartoPorNumero(quarto.getNumero());
+
+        if (cadastrado == null || cadastrado.getStatusLimpeza() != StatusLimpeza.LIMPO) {
+            return false;
+        }
+
+        for (Reserva reserva : reservas) {
+
+            if (reserva.getCancelada()
+                    || !reserva.getQuarto().getNumero().equals(cadastrado.getNumero())) {
+                continue;
+            }
+
+            LocalDateTime fimReserva = reserva.jaFezCheckout()
+                    ? reserva.getHorarioLiberacao()
+                    : reserva.getDataSaida();
+
+            if (entrada.isBefore(fimReserva)
+                    && saida.isAfter(reserva.getDataEntrada())) {
+                return false;
+            }
+        }
+
         return true;
     }
 

@@ -32,8 +32,17 @@
       </HBox>
 
       <HBox alignment="CENTER" spacing="20">
-        <Button onAction="#abrirPagamentos" styleClass="cartao" text="💳&#10;Pagamentos" />
-        <Button onAction="#abrirLimpeza" styleClass="cartao" text="🧹&#10;Limpeza dos quartos" />
+        <Button onAction="#abrirPagamentos"
+                styleClass="cartao"
+                text="💳&#10;Pagamentos" />
+
+        <Button onAction="#abrirCheckout"
+                styleClass="cartao"
+                text="🏨&#10;Finalizar&#10;Hospedagem" />
+
+        <Button onAction="#abrirLimpeza"
+                styleClass="cartao"
+                text="🧹&#10;Limpeza dos quartos" />
       </HBox>
 
       <Label fx:id="mensagem" styleClass="mensagem" text="Selecione uma opção para começar." wrapText="true" />

@@ -1,0 +1,102 @@
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sistemahotel.controller.LimpezaController"
+            prefWidth="900.0"
+            prefHeight="600.0"
+            style="-fx-background-color: #f5f1ea;">
+
+    <VBox alignment="CENTER"
+          spacing="20"
+          AnchorPane.topAnchor="35"
+          AnchorPane.bottomAnchor="35"
+          AnchorPane.leftAnchor="100"
+          AnchorPane.rightAnchor="100">
+
+        <padding>
+            <Insets top="25" right="35" bottom="25" left="35"/>
+        </padding>
+
+        <Label text="Controle de Limpeza"
+               style="-fx-font-family: Georgia;
+                      -fx-font-size: 30px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <Label text="Gerencie a limpeza e liberação dos quartos."
+               style="-fx-font-size: 14px;
+                      -fx-text-fill: #666666;"/>
+
+        <Label text="Selecione o quarto"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbReserva"
+                  promptText="Selecione um quarto em limpeza"
+                  maxWidth="Infinity"
+                  prefHeight="42"/>
+
+        <VBox spacing="15"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-padding: 25;">
+
+            <Label text="Informações do quarto"
+                   style="-fx-font-family: Georgia;
+                          -fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #243447;"/>
+
+            <Label text="Último hóspede:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblHospede" text="-"/>
+
+            <Label text="Número do quarto:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblQuarto" text="-"/>
+
+            <Label text="Horário de liberação:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblLiberacao" text="-"/>
+
+            <Label text="Status da limpeza:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblStatus"
+                   text="Nenhum quarto selecionado"
+                   wrapText="true"
+                   style="-fx-text-fill: #243447;"/>
+
+        </VBox>
+
+        <Button fx:id="btnFinalizar"
+                text="Finalizar Limpeza"
+                onAction="#finalizarLimpeza"
+                maxWidth="Infinity"
+                prefHeight="45"
+                style="-fx-background-color: #c9a24d;
+                       -fx-background-radius: 8;
+                       -fx-text-fill: white;
+                       -fx-font-size: 15px;
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;"/>
+
+        <Button text="Atualizar Lista"
+                onAction="#atualizarLista"
+                maxWidth="Infinity"
+                prefHeight="40"
+                style="-fx-background-color: #243447;
+                       -fx-background-radius: 8;
+                       -fx-text-fill: white;
+                       -fx-cursor: hand;"/>
+
+    </VBox>
+
+</AnchorPane>

@@ -1,0 +1,97 @@
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sistemahotel.controller.CheckoutController"
+            prefWidth="900.0"
+            prefHeight="600.0"
+            style="-fx-background-color: #f5f1ea;">
+
+    <VBox alignment="CENTER"
+          spacing="18.0"
+          prefWidth="550.0"
+          AnchorPane.topAnchor="35.0"
+          AnchorPane.bottomAnchor="35.0"
+          AnchorPane.leftAnchor="175.0"
+          AnchorPane.rightAnchor="175.0">
+
+        <padding>
+            <Insets top="25" right="35" bottom="25" left="35"/>
+        </padding>
+
+        <Label text="Finalizar Hospedagem"
+               style="-fx-font-family: Georgia;
+                      -fx-font-size: 30px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <Label text="Selecione uma reserva para realizar o checkout."
+               wrapText="true"
+               style="-fx-font-size: 13px;
+                      -fx-text-fill: #666666;"/>
+
+        <Label text="Reserva"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbReserva"
+                  promptText="Selecione uma reserva"
+                  maxWidth="Infinity"
+                  prefHeight="40.0"/>
+
+        <VBox spacing="15.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-padding: 25;">
+
+            <Label text="Resumo da hospedagem"
+                   style="-fx-font-family: Georgia;
+                          -fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #243447;"/>
+
+            <Label text="Hóspede:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblHospede"
+                   text="Nenhum hóspede selecionado"/>
+
+            <Label text="Quarto:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblQuarto" text="-"/>
+
+            <Label text="Período:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblPeriodo" text="-"/>
+
+            <Label text="Valor da hospedagem:"
+                   style="-fx-font-weight: bold;"/>
+
+            <Label fx:id="lblValor"
+                   text="R$ 0,00"
+                   style="-fx-font-family: Georgia;
+                          -fx-font-size: 24px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #243447;"/>
+
+        </VBox>
+
+        <Button text="Finalizar Hospedagem"
+                onAction="#finalizarCheckout"
+                maxWidth="Infinity"
+                prefHeight="45.0"
+                style="-fx-background-color: #c9a24d;
+                       -fx-background-radius: 8;
+                       -fx-text-fill: white;
+                       -fx-font-size: 15px;
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;"/>
+
+    </VBox>
+
+</AnchorPane>

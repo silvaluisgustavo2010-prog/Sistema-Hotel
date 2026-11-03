@@ -114,8 +114,9 @@ public class SistemaHotel {
     }
 
     public boolean limpezaConcluida(Reserva reserva) {
-        return reserva != null && reserva.jaFezCheckout()
-                && !LocalDateTime.now().isBefore(reserva.getHorarioLiberacao());
+        return reserva != null
+                && reserva.jaFezCheckout()
+                && reserva.getQuarto().getStatusLimpeza() == StatusLimpeza.EM_LIMPEZA;
     }
 
     public boolean finalizarLimpeza(Reserva reserva) {
