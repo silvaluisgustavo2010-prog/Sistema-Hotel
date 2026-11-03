@@ -1,0 +1,127 @@
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sistemahotel.controller.PagamentosController"
+            prefWidth="900.0"
+            prefHeight="600.0"
+            style="-fx-background-color: #f5f1ea;">
+
+    <VBox alignment="CENTER"
+          spacing="15.0"
+          prefWidth="550.0"
+          AnchorPane.topAnchor="25.0"
+          AnchorPane.bottomAnchor="25.0"
+          AnchorPane.leftAnchor="175.0"
+          AnchorPane.rightAnchor="175.0">
+
+        <padding>
+            <Insets top="20" right="30" bottom="20" left="30"/>
+        </padding>
+
+        <Label text="Pagamentos"
+               style="-fx-font-family: Georgia;
+                      -fx-font-size: 30px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <Label text="Consulte as dívidas e registre os pagamentos dos hóspedes."
+               wrapText="true"
+               style="-fx-font-size: 13px;
+                      -fx-text-fill: #666666;"/>
+
+        <Label text="Selecione a dívida"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbDivida"
+                  promptText="Selecione uma dívida"
+                  maxWidth="Infinity"
+                  prefHeight="40.0"/>
+
+        <VBox spacing="12.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-padding: 20;">
+
+            <Label text="Detalhes da dívida"
+                   style="-fx-font-family: Georgia;
+                          -fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #243447;"/>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Hóspede:"
+                       style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblHospede"
+                       text="Nenhuma dívida selecionada"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Valor original:"
+                       style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblValorOriginal" text="R$ 0,00"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Valor já pago:"
+                       style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblValorPago" text="R$ 0,00"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Saldo restante:"
+                       style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblSaldo"
+                       text="R$ 0,00"
+                       style="-fx-text-fill: #b8862b;
+                              -fx-font-weight: bold;"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Situação:"
+                       style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblSituacao"
+                       text="Sem dívidas cadastradas"/>
+            </HBox>
+
+        </VBox>
+
+        <Label text="Valor do pagamento"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <TextField fx:id="txtValorPagamento"
+                   promptText="Exemplo: 150,50"
+                   prefHeight="40.0"/>
+
+        <Label text="Forma de pagamento"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbFormaPagamento"
+                  promptText="Selecione a forma de pagamento"
+                  maxWidth="Infinity"
+                  prefHeight="40.0"/>
+
+        <Button text="Registrar Pagamento"
+                onAction="#registrarPagamento"
+                maxWidth="Infinity"
+                prefHeight="45.0"
+                style="-fx-background-color: #c9a24d;
+                       -fx-background-radius: 8;
+                       -fx-text-fill: white;
+                       -fx-font-size: 15px;
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;"/>
+
+    </VBox>
+</AnchorPane>

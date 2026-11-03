@@ -1,0 +1,105 @@
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sistemahotel.controller.ReservasController"
+            prefWidth="900.0"
+            prefHeight="600.0"
+            style="-fx-background-color: #f5f1ea;">
+
+    <VBox alignment="CENTER"
+          spacing="18.0"
+          prefWidth="520.0"
+          AnchorPane.topAnchor="35.0"
+          AnchorPane.bottomAnchor="35.0"
+          AnchorPane.leftAnchor="190.0"
+          AnchorPane.rightAnchor="190.0">
+
+        <padding>
+            <Insets top="25" right="35" bottom="25" left="35"/>
+        </padding>
+
+        <Label text="Nova Reserva"
+               style="-fx-font-family: Georgia;
+                      -fx-font-size: 30px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <Label text="Selecione o hóspede e o quarto para realizar a reserva."
+               wrapText="true"
+               style="-fx-font-size: 13px;
+                      -fx-text-fill: #666666;"/>
+
+        <Label text="Hóspede"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbHospede"
+                  promptText="Selecione o hóspede"
+                  maxWidth="Infinity"
+                  prefHeight="40.0"/>
+
+        <Label text="Quarto"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <ComboBox fx:id="cmbQuarto"
+                  promptText="Selecione o quarto"
+                  maxWidth="Infinity"
+                  prefHeight="40.0"/>
+
+        <Label text="Data de entrada"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <DatePicker fx:id="dataEntrada"
+                    promptText="Data de entrada"
+                    maxWidth="Infinity"/>
+
+        <Label text="Data de saída"
+               style="-fx-font-weight: bold;
+                      -fx-text-fill: #243447;"/>
+
+        <DatePicker fx:id="dataSaida"
+                    promptText="Data de saída"
+                    maxWidth="Infinity"/>
+
+        <VBox alignment="CENTER"
+              spacing="7.0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-padding: 15;">
+
+            <Label text="VALOR TOTAL DA ESTADIA"
+                   style="-fx-font-size: 12px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #666666;"/>
+
+            <Label fx:id="lblValorTotal"
+                   text="R$ 0,00"
+                   style="-fx-font-family: Georgia;
+                          -fx-font-size: 25px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #243447;"/>
+        </VBox>
+
+        <Button text="Confirmar Reserva"
+                onAction="#confirmarReserva"
+                maxWidth="Infinity"
+                prefHeight="45.0"
+                style="-fx-background-color: #c9a24d;
+                       -fx-background-radius: 8;
+                       -fx-text-fill: white;
+                       -fx-font-size: 15px;
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;"/>
+
+    </VBox>
+</AnchorPane>

@@ -12,6 +12,12 @@ import java.util.ArrayList;
 
 public class SistemaHotel {
     private final Hotel hotel;
+    private static final SistemaHotel INSTANCIA =
+            new SistemaHotel(new Hotel());
+
+    public static SistemaHotel getInstancia() {
+        return INSTANCIA;
+    }
 
     public SistemaHotel(Hotel hotel) {
         if (hotel == null) throw new IllegalArgumentException("O hotel é obrigatório.");
